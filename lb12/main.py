@@ -1,40 +1,60 @@
-import random 
+import TransportCompany as TC
+import Client as c
+import Vehicle as vh
+#Кудлаш Иван
+f = ""
 
-class Client():
-    name = ""
-    cargo_weight = 1.0
-    is_vip = False
-class Vehicle():
-    vehicle_id = f"{random.randint(0, 1000)}"
-    capacity = 10.0
-    current_load = 1.0
-    clients_list = []
+while True:
 
-    def load_cargo(Client):
-        if(Vehicle.current_load+Client.cargo_weight<=Vehicle.capacity):
-            Vehicle.current_load+=Client.cargo_weight
-        else:
-            print("nth")
+print(">>  Вывод клиентов << - 1")
+print(">>  Вывод транспорта << - 2")
+print(">>  Добавить клиента << - 3")
+print(">>  Добавить транспорт << - 4")
+print(">>  Удалить клиента << - 5")
+print(">>  Удалить транспорт << - 6")
+print(">>  Выход их программы << - 7")
+print(" ")
 
-    def __str__():
-        return f"id- {Vehicle.vehicle_id}, max mass- {Vehicle.capacity}, mass- {Vehicle.current_load}"
+   
+comand = int(input("Выберите пункт(например:1): ")) 
+if(comand <= 0 or comand > 7):
+    print("Неверное число")
+    print(" ")
+else:
+    match comand: 
+        case 1:
+            if not TC.clients:
+                print("Клиентов нет")
+            else:
+                for i in TC.clients:
+                    print(f"Имя клиента: {i.name}, вес груза: {i.cargo_weight}, {if i.is_vip==True: f="Клиент ВИП" else: f="Обычный клиент"} {f}")
 
-class Van(Vehicle):
-    is_refrigerated = False
+        case 2:
+            if not TC.vehicles:
+                print("Клиентов нет")
+            else:
+                for i in TC.vehicles:
+                    print(f"{if type(i) is Ship: f=(f"Имя: {i.name}, ID: {i.vehicle_id}, Грузоподъемность: {i.capacity}, Загруженность: {i.current_load}, Список клиентов: {i.clients_list}") else: f=(f"Есть ли холодильник: {i.is_refrigerated}, ID: {i.vehicle_id}, Грузоподъемность: {i.capacity}, Загруженность: {i.current_load}, Список клиентов: {i.clients_list}")}")
 
-class Ship(Vehicle):
-    name = "Gordinya"
+        case 3: # Добавляем записи
+            a=input("Введите ваше имя")
+            b=input("Введите вес вашего груза") 
+            c=input("Являетесь ли вы вип клиентом?(True/False)")
 
-class TransportCompany():
-    name = "OOOOO"
-    vehicles = []
-    clients = []
+        case 4:# Удаляем выбранную запись
+            id_for_del = input("Введите id для удаления: ") # Запрашиваем id для удаления
+            with open("C:\Users\KudlaIva_89\Desktop\Лабы Кудлаш\lr7\task3\dump.json", "r", encoding="utf-8") as file:
+                fourth = json.load(file)
 
-    def add_vehicle(vehicle):
-        if(vehicle is str):
-            TransportCompany.vehicles.append(vehicle)
-    def list_vehicles():
-        print(TransportCompany.vehicles)
-    def add_client(client):
-        TransportCompany.clients.append(client)
-print(Vehicle.__str__())
+                lens = len(fourth)# Считываем длину файла для будущей прверки
+                fourth = [star for star in fourth if str(star.get("id")) != id_for_del] # Перебираем список, но без элемента с выбранным id
+
+                if len(fourth) < lens: # Проверяем удалился ли элемент
+                    with open("C:\Users\KudlaIva_89\Desktop\Лабы Кудлаш\lr7\task3\dump.json", "w", encoding="utf-8") as file:
+                        json.dump(fourth) # Сохраняем изменения
+                    print("Запись удалена.")
+                else:
+                    print("Запись с таким id не найдена.")
+
+        case 5:
+            x=0 # Завершаем цикл

@@ -3,4 +3,6 @@ class Client():
         self.name = name
         self.cargo_weight = cargo_weight
         self.is_vip = False
-   
+    def gav(i):
+        print("gav"*i)
+Client.gav(6)
