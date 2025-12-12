@@ -1,11 +1,12 @@
 import Client
+import Vehicle
 class TransportCompany():
     def __init__(self, name):
         self.name = name
         self.vehicles = []
         self.clients = []
 
-    def add_vehicle(vehicle):
+    def add_vehicle(self, vehicle):
         if not isinstance(vehicle, Vehicle):
             raise TypeError("Нет Vehicle/наследуемый класс")
         self.vehicles.append(vehicle)

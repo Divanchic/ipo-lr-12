@@ -1,8 +1,12 @@
 class Client():
-    def __init__(self, name, cargo_weight,is_vip):
+    def __init__(self, name):
         self.name = name
-        self.cargo_weight = cargo_weight
-        self.is_vip = False
-    def gav(i):
-        print("gav"*i)
-Client.gav(6)
+        self.names = []
+    def gav(self):
+        self.names.append(self.name)
+    def asd(self):
+        return self.names
+
+a = Client("ivan")
+a.gav()
+print(a.name)
