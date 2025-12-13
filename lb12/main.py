@@ -1,4 +1,4 @@
-from TransportCompany import TransportCompany as TC
+from TransportCompany import TransportCompany as T
 from Client import Client as clint
 from Vehicle import Vehicle as vh
 from Ship import Ship as sp
@@ -6,7 +6,7 @@ from Van import Van as vn
 
 f = ""
 x = 1
-
+TC = T("ТК 'Железо-стале-шлако-блок'")
 while x==1:
 
     print(">>  Вывод клиентов << - 1")
@@ -41,9 +41,9 @@ while x==1:
                 else:
                     for i in TC.vehicles:
                         if type(i) is sp:
-                            print(f"Имя: {i.name}, ID: {i.vehicle_id}, Грузоподъемность: {i.capacity}, Загруженность: {i.current_load}, Список клиентов: {i.clients_list}")
+                            print(f"Корабль; Имя: {i.name}")
                         else:
-                            print(f"Есть ли холодильник: {i.is_refrigerated}, ID: {i.vehicle_id}, Грузоподъемность: {i.capacity}, Загруженность: {i.current_load}, Список клиентов: {i.clients_list}")
+                            print(f"Фура; Есть ли холодильник: {i.is_refrigerated}")
 
 
             case 3: # Добавляем записи
