@@ -1,19 +1,20 @@
 from TransportCompany import TransportCompany as TC
 from Client import Client as clint
 from Vehicle import Vehicle as vh
-from Ship import Ship
-#Кудлаш Иван
-f = ""
+from Ship import Ship as sp
+from Van import Van as vn
 
-while True:
+f = ""
+x = 1
+
+while x==1:
 
     print(">>  Вывод клиентов << - 1")
     print(">>  Вывод транспорта << - 2")
     print(">>  Добавить клиента << - 3")
     print(">>  Добавить транспорт << - 4")
-    print(">>  Удалить клиента << - 5")
-    print(">>  Удалить транспорт << - 6")
-    print(">>  Выход их программы << - 7")
+    print(">>  Оптимизировать груз по Транспортных Средствам << - 5")
+    print(">>  Выход их программы << - 6")
     print(" ")
 
 
@@ -36,20 +37,24 @@ while True:
 
             case 2:
                 if not TC.vehicles:
-                    print("Клиентов нет")
+                    print("Транспортных средств нет")
                 else:
                     for i in TC.vehicles:
-                        if type(i) is Ship:
+                        if type(i) is sp:
                             print(f"Имя: {i.name}, ID: {i.vehicle_id}, Грузоподъемность: {i.capacity}, Загруженность: {i.current_load}, Список клиентов: {i.clients_list}")
                         else:
                             print(f"Есть ли холодильник: {i.is_refrigerated}, ID: {i.vehicle_id}, Грузоподъемность: {i.capacity}, Загруженность: {i.current_load}, Список клиентов: {i.clients_list}")
 
 
             case 3: # Добавляем записи
-                a=input("Введите ваше имя")
-                b=int(input("Введите вес вашего груза") )
-                c=input("Являетесь ли вы вип клиентом?(True/False)")
-                d = clint(a ,b ,c)
+                a = input("Введите ваше имя")
+                b = int(input("Введите вес вашего груза") )
+                c = input("Являетесь ли вы вип клиентом?(True/False)")
+                if c=="True":
+                    c=True
+                else:
+                    c=False
+                d = clint(a, b, c)
                 TC.add_client(d)
 
             case 4:
@@ -57,24 +62,23 @@ while True:
                 if cls == "ship":
                     a = input("Введите имя корабля")
                     b = int(input("Введите максимально перевозимый вес"))
-                    if not TC.clients:
-                        print("Клиентов нет")
-                    else:
-                        print("Выберете нужного клиента и впишите его имя")
-                        numb=1
-                        for i in TC.clients:
-                            print(f"{numb}-{i.name}")
-                        name_cl=input("Введите имя клиента")
-                        for i in TC.clients:
-                            if i.name == name_cl:
-                                c = i.name
-                                veight = i.cargo_weight
-                        z = Ship(b, a)
-                        z.load_cargo(z)
+                    z = sp(b, a)
+                    TC.add_vehicle(z)
                 else:
-                    a = input("Есть ли холодильник?(писать True/False)")
+                    a = bool(input("Есть ли холодильник?(писать True/False)"))
                     b = int(input("Введите максимально перевозимый вес"))
-
+                    z = vn(b, a)
 
             case 5:
-                x=0 # Завершаем цикл
+                TC.optimize_cargo_distribution()
+                print("\n--- Результат распределения ---")
+                for i in TC.vehicles:
+                    print(i)
+                    if i.clients_list:
+                        for c in i.clients_list:
+                            print(f" - {c.name}, груз: {c.cargo_weight}т")
+                    else:
+                        print("(пусто)")
+            case 6:
+                print("Программа закончена")
+                x=0

@@ -1,4 +1,4 @@
-import Vehicle
+from Vehicle import Vehicle
 class Van(Vehicle):
-    def __init__(self, name, cargo_weight,is_vip):
-        self.is_refrigerated = False
+    def __init__(self, cargo_weight, is_vip):
+        is_refrigerated = False

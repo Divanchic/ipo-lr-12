@@ -1,5 +1,5 @@
-import Client
-import Vehicle
+from Client import Client
+from Vehicle import Vehicle
 class TransportCompany():
     def __init__(self, name):
         self.name = name

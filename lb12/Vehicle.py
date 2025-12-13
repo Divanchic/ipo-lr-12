@@ -1,17 +1,16 @@
 import random
 from Client import Client
 
-
 class Vehicle():
     def __init__(self, capacity):
         vehicle_id = f"{random.randint(0, 1000)}"
-        self.capacity = capacity
-        self.current_load = 0.0
-        self.clients_list = []
+        capacity = 10.0
+        current_load = 0.0
+        clients_list = []
 
-    def load_cargo(self, weight):
-        if(self.current_loаd + weight<=self.capacity):
-            self.current_load+=weight
+    def load_cargo(self):
+        if(self.current_load + Client.cargo_weight<=self.capacity):
+            self.current_load+=Client.cargo_weight
         else:
             print("вес слишком велик")
 
