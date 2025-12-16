@@ -3,6 +3,9 @@ from Client import Client as clint
 from Vehicle import Vehicle as vh
 from Ship import Ship as sp
 from Van import Van as vn
+from tkinter import *
+from tkinter import ttk
+
 
 f = ""
 x = 1
@@ -19,7 +22,7 @@ while x==1:
 
 
     comand = int(input("Выберите пункт(например:1): "))
-    if(comand <= 0 or comand > 7):
+    if(comand <= 0 or comand > 6):
         print("Неверное число")
         print(" ")
     else:
@@ -49,12 +52,13 @@ while x==1:
             case 3: # Добавляем записи
                 a = input("Введите ваше имя")
                 b = int(input("Введите вес вашего груза") )
-                c = input("Являетесь ли вы вип клиентом?(True/False)")
-                if c=="True":
-                    c=True
+                c = input("Являетесь ли вы вип клиентом?(да/нет)")
+                print(c)
+                if c == "да":
+                    arg = True
                 else:
-                    c=False
-                d = clint(a, b, c)
+                    arg = False
+                d = clint(a, b, arg)
                 TC.add_client(d)
 
             case 4:
@@ -65,9 +69,15 @@ while x==1:
                     z = sp(b, a)
                     TC.add_vehicle(z)
                 else:
-                    a = bool(input("Есть ли холодильник?(писать True/False)"))
+                    a = input("Есть ли холодильник?(да/нет)")
+                    if a == "да":
+                        arg1 = True
+                    else:
+                        arg1 = False
+                    print(arg1)
                     b = int(input("Введите максимально перевозимый вес"))
-                    z = vn(b, a)
+                    z = vn(b, arg1)
+                    TC.add_vehicle(z)
 
             case 5:
                 TC.optimize_cargo_distribution()
